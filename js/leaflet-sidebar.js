@@ -11,7 +11,8 @@ L.Control.Sidebar = L.Control.extend(/** @lends L.Control.Sidebar.prototype */ {
     includes: (L.Evented.prototype || L.Mixin.Events),
 
     options: {
-        position: 'left'
+        position: 'left',
+        autopan: false,
     },
 
     initialize: function (id, options) {
@@ -155,6 +156,7 @@ L.Control.Sidebar = L.Control.extend(/** @lends L.Control.Sidebar.prototype */ {
         if (L.DomUtil.hasClass(this._sidebar, 'collapsed')) {
             this.fire('opening');
             L.DomUtil.removeClass(this._sidebar, 'collapsed');
+            if (this.options.autopan) this._panMap('open');
         }
 
         return this;
@@ -175,6 +177,7 @@ L.Control.Sidebar = L.Control.extend(/** @lends L.Control.Sidebar.prototype */ {
         if (!L.DomUtil.hasClass(this._sidebar, 'collapsed')) {
             this.fire('closing');
             L.DomUtil.addClass(this._sidebar, 'collapsed');
+            if (this.options.autopan) this._panMap('close');
         }
 
         return this;
