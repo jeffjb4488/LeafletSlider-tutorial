@@ -12,7 +12,7 @@ L.Control.Sidebar = L.Control.extend(/** @lends L.Control.Sidebar.prototype */ {
 
     options: {
         position: 'left',
-        autopan: false,
+        autopan: true,
     },
 
     initialize: function (id, options) {
