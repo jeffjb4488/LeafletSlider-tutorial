@@ -443,14 +443,7 @@ var sidebar = L.control.sidebar({ container: 'sidebar' })
                 title: 'JS API',
                 pane: '<p>The Javascript API allows to dynamically create or modify the panel state.<p/><p><button onclick="sidebar.enablePanel(\'mail\')">enable mails panel</button><button onclick="sidebar.disablePanel(\'mail\')">disable mails panel</button></p><p><button onclick="addUser()">add user</button></b>',
             })
-            // add a tab with a click callback, initially disabled
-            .addPanel({
-                id:   'mail',
-                tab:  '<i class="fa fa-envelope"></i>',
-                title: 'Messages',
-                button: function() { alert('opened via JS callback') },
-                disabled: true,
-            })
+                        
             
 	var userid = 0
         function addUser() {
