@@ -182,6 +182,14 @@ L.Control.Sidebar = L.Control.extend(/** @lends L.Control.Sidebar.prototype */ {
 
         return this;
     },
+    
+    _panMap: function(openClose) {
+        var panWidth = Number.parseInt(L.DomUtil.getStyle(this._container, 'max-width')) / 2;
+        if (
+            openClose === 'open' && this.options.position === 'left' ||
+            openClose === 'close' && this.options.position === 'right'
+        ) panWidth *= -1;
+        this._map.panBy([panWidth, 0], { duration: 0.5 });
 
     /**
      * @private
@@ -201,13 +209,7 @@ L.Control.Sidebar = L.Control.extend(/** @lends L.Control.Sidebar.prototype */ {
     }
 });
 
-_panMap: function(openClose) {
-        var panWidth = Number.parseInt(L.DomUtil.getStyle(this._container, 'max-width')) / 2;
-        if (
-            openClose === 'open' && this.options.position === 'left' ||
-            openClose === 'close' && this.options.position === 'right'
-        ) panWidth *= -1;
-        this._map.panBy([panWidth, 0], { duration: 0.5 });
+
 
 /**
  * Creates a new sidebar.
