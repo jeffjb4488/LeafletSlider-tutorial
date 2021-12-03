@@ -42,9 +42,9 @@
         </head>
    <body>
         <div id="myMap"<>/div>
-	<div id="sidebar" class="sidebar collapsed">
+	<div id="sidebar" class="leaflet-sidebar collapsed">
         <!-- Nav tabs -->
-        <div class="sidebar-tabs">
+        <div class="leaflet-sidebar-tabs">
             <ul role="tablist">
                 <li><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
                 <li><a href="#profile" role="tab"><i class="fa fa-bookmark"></i></a></li>
@@ -55,11 +55,11 @@
         </div>
 
         <!-- Tab panes -->
-        <div class="sidebar-content">
-            <div class="sidebar-pane" id="home">
-                <h1 class="sidebar-header">
+        <div class="leaflet-sidebar-content">
+            <div class="leaflet-sidebar-pane" id="home">
+                <h1 class="leaflet-sidebar-header">
                     Map Title Goes Here
-                    <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
+                    <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
                 </h1>
 
                 
@@ -73,8 +73,8 @@
                 <p class="lorem">Use the slider in the top right corner of the map to visualize when each business closed, some went out of business in the first weeks of the lockdown, while others stuck it out for months. Click on any of the 15 businesses to read about their specific circumstances derived from owner interviews and official social media posts. In this narrative, the voices of non-owner foodservice workers are missing and was not something broadly accessible at this time.</p>
             </div>
 
-            <div class="sidebar-pane" id="profile">
-                <h1 class="sidebar-header">References<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+            <div class="leaflet-sidebar-pane" id="profile">
+                <h1 class="leaflet-sidebar-header">References<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
 		  <br>
 		  <li>Couch, Graham (2020) Inside the Lansing-area restaurant industry's fight to survive. <i>Lansing State Journal</i>, July 13, 2020. <a href="https://www.lansingstatejournal.com/story/sports/columnists/graham-couch/2020/05/07/lansing-area-restaurants-fight-to-survive-couch-column/3069370001/" target="_blank">Source</a> </li>
 		  <li>Greco, Rachel (2020) Coronavirus stripped Groovy Donuts of its momentum. Then the community stepped in. <i>Lansing State Journal</i>, May 12, 2020 <a href="https://www.lansingstatejournal.com/story/news/local/2020/05/13/coronavirus-stripped-groovy-donuts-its-momentum-then-community-stepped-in-east-lansing-williamston/3076751001/" target="_blank">Source</a> </li>
@@ -82,13 +82,13 @@
 		  <li>Kaminski, Kyle and Shauna Stocken (2020) At least 70 businesses gone or paused. <i>City Pulse</i>, May 28, 2020 <a href="https://lansingcitypulse.com/stories/at-least-70-businesses-gone-or-paused,14931" target="_blank">Source</a></li>
             </div>
 
-            <div class="sidebar-pane" id="messages">
-                <h1 class="sidebar-header">Messages<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+            <div class="leaflet-sidebar-pane" id="messages">
+                <h1 class="leaflet-sidebar-header">Messages<span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
 		    <p><b><a class="one" href="mailto:fadat85580@nefacility.com" target="_blank">Contact Us!</a></b></p>
             </div>
 
-            <div class="sidebar-pane" id="settings">
-                <h1 class="sidebar-header">Settings<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+            <div class="leaflet-sidebar-pane" id="settings">
+                <h1 class="leaflet-sidebar-header">Settings<span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
             </div>
         </div>
     </div>
@@ -431,8 +431,36 @@ map1.addControl(sliderControl1);
 // Initialize the slider
 sliderControl1.startSlider();
                 
-var sidebar = L.control.sidebar('sidebar').addTo(map1); 	
-	sidebar.open('home');
+var sidebar = L.control.sidebar({ container: 'sidebar' })
+            .addTo(map1)
+            .open('home');
+		
+ // add panels dynamically to the sidebar
+        sidebar
+            .addPanel({
+                id:   'js-api',
+                tab:  '<i class="fa fa-gear"></i>',
+                title: 'JS API',
+                pane: '<p>The Javascript API allows to dynamically create or modify the panel state.<p/><p><button onclick="sidebar.enablePanel(\'mail\')">enable mails panel</button><button onclick="sidebar.disablePanel(\'mail\')">disable mails panel</button></p><p><button onclick="addUser()">add user</button></b>',
+            })
+            // add a tab with a click callback, initially disabled
+            .addPanel({
+                id:   'mail',
+                tab:  '<i class="fa fa-envelope"></i>',
+                title: 'Messages',
+                button: function() { alert('opened via JS callback') },
+                disabled: true,
+            })
+            
+	var userid = 0
+        function addUser() {
+            sidebar.addPanel({
+                id:   'user' + userid++,
+                tab:  '<i class="fa fa-user"></i>',
+                title: 'User Profile ' + userid,
+                pane: '<p>user ipsum dolor sit amet</p>',
+            });
+        }
 
 var zoom_bar = new L.Control.ZoomBar({position: 'topright'}).addTo(map1);
        
