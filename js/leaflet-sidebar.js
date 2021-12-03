@@ -202,7 +202,7 @@ L.Control.Sidebar = L.Control.extend(/** @lends L.Control.Sidebar.prototype */ {
 });
 
 _panMap: function(openClose) {
-        var panWidth = Number.parseInt(L.DomUtil.getStyle(this._sidebar, 'max-width')) / 2;
+        var panWidth = Number.parseInt(L.DomUtil.getStyle(this._container, 'max-width')) / 2;
         if (
             openClose === 'open' && this.options.position === 'left' ||
             openClose === 'close' && this.options.position === 'right'
