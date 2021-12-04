@@ -336,7 +336,3 @@ L.Control.SliderControl = L.Control.extend({
 L.control.sliderControl = function (options) {
     return new L.Control.SliderControl(options);
 };
-
-map.on('popupopen', function (marker) {
-    map.setView(marker.target._popup._latlng, e.target._zoom);
-});
