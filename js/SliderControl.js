@@ -336,3 +336,11 @@ L.Control.SliderControl = L.Control.extend({
 L.control.sliderControl = function (options) {
     return new L.Control.SliderControl(options);
 };
+
+function clickZoom(e) {
+	map.setView(e.target.getLatLng(),15);
+}
+
+var dataset1 = L.marker([42.7363966, -84.5077828], {
+  title: "Frandor Deli"
+}).addTo(map).bindPopup("Frandor Deli").on('click', clickZoom);
