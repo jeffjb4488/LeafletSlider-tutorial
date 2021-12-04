@@ -337,10 +337,8 @@ L.control.sliderControl = function (options) {
     return new L.Control.SliderControl(options);
 };
 
-function clickZoom(e) {
-	map.setView(e.target.getLatLng(),15);
-}
-
-var dataset1 = L.marker([42.7363966, -84.5077828], {
-  title: "Frandor Deli"
-}).addTo(map).bindPopup("Frandor Deli").on('click', clickZoom);
+map.on('popupopen', function(e) {
+    var px = map.project(e.target._popup._latlng); // find the pixel location on the map where the popup anchor is
+    px.y -= e.target._popup._container.clientHeight/2; // find the height of the popup container, divide by 2, subtract from the Y axis of marker location
+    map.panTo(map.unproject(px),{animate: true}); // pan to new center
+});
