@@ -110,9 +110,11 @@
             var dataset1 = [
                 {
                     type: 'Feature',
+		    bindTooltip: "Short description",
                     geometry: {
                         type: 'Point',
-                        coordinates: [-84.5077828, 42.7363966]
+                        coordinates: [-84.5077828, 42.7363966],
+		
                     },
                     properties: {
                         title: 'Frandor Deli',
@@ -126,7 +128,9 @@
                             popupAnchor: [0, -41],
                             className: 'dot',
                         }
+			
                     }
+		
                 },
                 {
                     type: 'Feature',
