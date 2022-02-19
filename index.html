@@ -157,9 +157,7 @@
 		    
 		var group1 = L.geoJSON(dataset1, optionsObject);
 
-            // Set the time attribute for each group
-            group1.options.time = "2020";
-            group2.options.time = "1873";
+
 
             // Create the layerGroup
             var multiLayers = L.layerGroup([group1, group2]);
@@ -178,6 +176,7 @@
             // Initialize the slider
             sliderControl1.startSlider();
         });
+		
         </script>
     </body>
 </html>
