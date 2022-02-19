@@ -47,44 +47,91 @@
         <script>
 
             // Start with geoJSON data
-            var dataset1 = [
+                       var dataset1 = [
+                {
+                    type: 'Feature',
+		    geometry: {
+                        type: 'Point',
+                        coordinates: [-70.56813705004735, 41.46150888423962]
+		
+                    },
+                    properties: {
+                        Lot_Number: 'Frandor Deli',
+                        Grantee: '<a href="https://frandordeli.weebly.com/">Frandor Deli</a> closed permanently the week of May 18, 2020 due to the COVID-19 pandemic. According to the Lansing State Journal, Frandor Deli had been open for 38 years.',
+                        time: '2020/05/18',
+                        image: 'html/Frandor_deli.jpg',
+                        icon: {
+                            iconUrl: 'html/restauranticon.png',
+                            iconSize: [25, 41],
+                            iconAnchor: [3, 35],
+                            popupAnchor: [0, -41],
+                            className: 'dot',
+                        }
+			
+                    }
+		
+                },
                 {
                     type: 'Feature',
                     geometry: {
                         type: 'Point',
-                        coordinates: [-119.0977191, 46.2465524]
+                        coordinates: [-70.55978282699071, 41.46299628120155] 
                     },
                     properties: {
-                        title: 'Popup 1',
-                        description: 'Hello World!',
-                        time: '1992/01'
+                        Lot_Numner: "Mijo's Diner",
+                        Grantee: 'On March 23, 2021, the owners of <a href="https://www.facebook.com/MijosDiner/">Mijo’s Diner</a> posted their final message to their customers on the business’s Facebook page: “To all our customers: Carole and I (Tony) want to thank you for your support of the diner over the last 21 years and other Mijo’s restaurants starting all the way back in 1976. We have made the decision to close the doors permanently. This was a difficult choice, but we believe it was the right decision given both the current situation and thinking about the future for Carole and myself. We hope you all continue to support other local businesses. We wish you all good health and thank you all for the memories. Sincerely, Carole and Tony"',
+                        time: '2020/03/23',
+                        image: 'html/Mijos_diner.jpeg',
+                        icon: {
+                            iconUrl: 'html/restauranticon.png',
+                            iconSize: [25, 41],
+                            iconAnchor: [3, 35],
+                            popupAnchor: [0, -41],
+                            className: 'dot',
+                        }
+                    }
+                },
+                 {
+                    type: 'Feature',
+                    geometry: {
+                        type: 'Point',
+                        coordinates: [-70.56254350973987, 41.458168877604066]
+                    },
+                    properties: {
+                        Lot_Number: 'Fireside Grill',
+                        Grantee: 'The owners of the <a href="https://www.facebook.com/FiresideGrill6951/">Fireside Grill</a> announced on March 16, 2021 that they would be closing indefinitely due to the COVID-19. A few months later on June 17, 2021, in a series of Facebook posts the restaurant thanked its customers for their support over the last seven years and announced the permanent closure of the restaurant. In an interview with the Lansing State Journal, owner Ed Hall expressed the difficulty owners of restaurants faced during the pandemic: "You’ve got to have a lot of money to weather a sustained shutdown....You’ve got to have deep pockets. You really do.”',
+                        time: '2020/06/17',
+                        image: 'html/Fireside_grill.jpg',
+                        icon: {
+                            iconUrl: 'html/restauranticon.png',
+                            iconSize: [25, 41],
+                            iconAnchor: [3, 35],
+                            popupAnchor: [0, -41],
+                            className: 'dot',
+                        }
                     }
                 },
                 {
                     type: 'Feature',
                     geometry: {
                         type: 'Point',
-                        coordinates: [-119.201977, 46.257038]
+                        coordinates: [-70.56366221778202, 41.45954817244251]
                     },
                     properties: {
-                        title: 'Popup 2',
-                        description: 'Hello again, World!',
-                        time: '1992/07'
+                        Lot_Number: 'The Brunch House',
+                        Grantee: 'While Leo Farhat was planning to retire within the next five years, he didn’t anticipate that the decision would be abruptly made for him in Spring 2020. <a href="https://www.lansingstatejournal.com/story/news/local/2020/05/27/restaurants-that-have-closed-permanently-in-lansing-mid-michigan-covid-19/5231525002/">He told the Lansing State Journal</a> that when Governor Gretchen Whitmer extended the stay at home order following the restaurant’s closure on March 16, he decided to officially close: “I just felt that it was going to be a long process. And so I called a staff meeting and informed them that I would be closing the restaurant. Unfortunately it’s gone on a lot longer, with so many questions about this pandemic, that I was pretty happy with the decision.”',
+                        time: '2020/03/16',
+                        image: 'html/The_brunch_house.jpg',
+                        icon: {
+                            iconUrl: 'html/restauranticon.png',
+                            iconSize: [25, 41],
+                            iconAnchor: [3, 35],
+                            popupAnchor: [0, -41],
+                            className: 'dot',
+                        }
                     }
-                },
-                {
-                    type: 'Feature',
-                    geometry: {
-                        type: 'Point',
-                        coordinates: [-119.1080419, 46.2309332]
-                    },
-                    properties: {
-                        title: 'Popup 3',
-                        description: 'Hello once again, World!',
-                        time: '1992/06'
-                    }
-                }
-            ];
+                };
+		   ];
 
             // Generate the map and set its initial view
         	var map1 = L.map('myMap').setView([46.26,-119.15], 12);
