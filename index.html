@@ -142,17 +142,16 @@
                 onEachFeature: onEachFeature
             };
             function onEachFeature (feature, layer) {
-               var content = "<div style='clear: both'></div><div style='float: left; padding: 5px; margin-right: 10px'><img style='width: 200px;' src=" + feature.properties.image + " /></div><div><h4>" + feature.properties.Lot_Number + "</h4><p>" + feature.properties.time + "</p><p>" + feature.properties.Grantee + "</p></div>";
-               layer.setIcon(L.icon(feature.properties.icon));
-                layer.bindPopup(content, {closeButton: true});
+               var content ="<div style='clear: both'></div><div><h4>" + feature.properties.image + " /></div><div><h4>" + feature.properties.Lot_Number + "</h4><p>" + feature.properties.time + "</p><p>" + feature.properties.Grantee + "</p></div>";
+               layer.bindPopup(content, {closeButton: true});
             };
 
 	var group1 = L.geoJSON(dataset1, optionsObject);
 
 
 	  // Create the second geoJSON layer from external file
-            $.getgeoJSON("data/polygon_test_wgs.geojson", function(geoJSON) {
-                var group2 = L.geoJSON(geoJSON, optionsObject);
+            $.getJSON("data/polygon_test_wgs.geojson", function(json) {
+                var group2 = L.geoJSON(json, optionsObject);
 		    
 	
             // Create the layerGroup
