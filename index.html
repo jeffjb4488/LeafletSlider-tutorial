@@ -149,11 +149,13 @@
 
 
             // Create the first geoJSON layer
-            var group1 = L.geoJSON(dataset1, optionsObject);
+            
 
             // Create the second geoJSON layer from external file
             $.getJSON("data/polygon_test_wgs.geojson", function(json) {
                 var group2 = L.geoJSON(json, optionsObject);
+		    
+		var group1 = L.geoJSON(dataset1, optionsObject);
 
             // Set the time attribute for each group
             group1.options.time = "2020";
