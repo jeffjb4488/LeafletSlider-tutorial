@@ -128,8 +128,8 @@
                             className: 'dot',
                         }
                     }
-                },
-		   ];
+		},
+                ];
 
             // Generate the map and set its initial view
         	var map1 = L.map('myMap').setView([41.46091391587842, -70.56499744996137], 12);
@@ -137,16 +137,7 @@
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
             }).addTo(map1);
 
-            // Write up the functions for using the geoJSON data to produce popups for each marker
-            var optionsObject = {
-                onEachFeature: onEachFeature
-            };
-            function onEachFeature (feature, layer) {
-               var content = "<div style='clear: both'></div><div style='float: left; padding: 5px; margin-right: 10px'><img style='width: 200px;' src=" + feature.properties.image + " /></div><div><h4>" + feature.properties.Lot_Number + "</h4><p>" + feature.properties.time + "</p><p>" + feature.properties.Grantee + "</p></div>";
-               layer.setIcon(L.icon(feature.properties.icon));
-                layer.bindPopup(content, {closeButton: true});
-            };
-
+          
 
         });
 		
