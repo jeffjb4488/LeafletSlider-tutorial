@@ -44,137 +44,124 @@
         <div id="myMap">Test this text.</div>
         <script>
 
-            // Start with geoJSON data
-        var dataset1 = [
-                {
-                    type: 'Feature',
-		    geometry: {
-                        type: 'Point',
-                        coordinates: [-70.56813705004735, 41.46150888423962]
+var map = L.map('myMap').setView([41.46091391587842, -70.56499744996137], 12);
+L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+}).addTo(map);
+     
 		
-                    },
-                    properties: {
-                        Lot_Number: 'Frandor Deli',
-                        Grantee: '<a href="https://frandordeli.weebly.com/">Frandor Deli</a> closed permanently the week of May 18, 2020 due to the COVID-19 pandemic. According to the Lansing State Journal, Frandor Deli had been open for 38 years.',
-                        time: '2020/05/18',
-                        image: 'html/Frandor_deli.jpg',
-                        icon: {
-                            iconUrl: 'html/restauranticon.png',
-                            iconSize: [25, 41],
-                            iconAnchor: [3, 35],
-                            popupAnchor: [0, -41],
-                            className: 'dot',
-                        }
-			
-                    }
+var geojson;
+        $(document).ready(function () {
+ $.getJSON("test_polygon_wgs84_2.geojson", function (geoJson) {
+                geojson = L.geoJson(geoJson, { style: style, onEachFeature: onEachFeature }).addTo(map);
+ });
+
 		
-                },
-                {
-                    type: 'Feature',
-                    geometry: {
-                        type: 'Point',
-                        coordinates: [-70.55978282699071, 41.46299628120155] 
-                    },
-                    properties: {
-                        Lot_Numner: "Mijo's Diner",
-                        Grantee: 'On March 23, 2021, the owners of <a href="https://www.facebook.com/MijosDiner/">Mijo’s Diner</a> posted their final message to their customers on the business’s Facebook page: “To all our customers: Carole and I (Tony) want to thank you for your support of the diner over the last 21 years and other Mijo’s restaurants starting all the way back in 1976. We have made the decision to close the doors permanently. This was a difficult choice, but we believe it was the right decision given both the current situation and thinking about the future for Carole and myself. We hope you all continue to support other local businesses. We wish you all good health and thank you all for the memories. Sincerely, Carole and Tony"',
-                        time: '2020/03/23',
-                        image: 'html/Mijos_diner.jpeg',
-                        icon: {
-                            iconUrl: 'html/restauranticon.png',
-                            iconSize: [25, 41],
-                            iconAnchor: [3, 35],
-                            popupAnchor: [0, -41],
-                            className: 'dot',
-                        }
-                    }
-                },
-                 {
-                    type: 'Feature',
-                    geometry: {
-                        type: 'Point',
-                        coordinates: [-70.56254350973987, 41.458168877604066]
-                    },
-                    properties: {
-                        Lot_Number: 'Fireside Grill',
-                        Grantee: 'The owners of the <a href="https://www.facebook.com/FiresideGrill6951/">Fireside Grill</a> announced on March 16, 2021 that they would be closing indefinitely due to the COVID-19. A few months later on June 17, 2021, in a series of Facebook posts the restaurant thanked its customers for their support over the last seven years and announced the permanent closure of the restaurant. In an interview with the Lansing State Journal, owner Ed Hall expressed the difficulty owners of restaurants faced during the pandemic: "You’ve got to have a lot of money to weather a sustained shutdown....You’ve got to have deep pockets. You really do.”',
-                        time: '2020/06/17',
-                        image: 'html/Fireside_grill.jpg',
-                        icon: {
-                            iconUrl: 'html/restauranticon.png',
-                            iconSize: [25, 41],
-                            iconAnchor: [3, 35],
-                            popupAnchor: [0, -41],
-                            className: 'dot',
-                        }
-                    }
-                },
-                {
-                    type: 'Feature',
-                    geometry: {
-                        type: 'Point',
-                        coordinates: [-70.56366221778202, 41.45954817244251]
-                    },
-                    properties: {
-                        Lot_Number: 'The Brunch House',
-                        Grantee: 'While Leo Farhat was planning to retire within the next five years, he didn’t anticipate that the decision would be abruptly made for him in Spring 2020. <a href="https://www.lansingstatejournal.com/story/news/local/2020/05/27/restaurants-that-have-closed-permanently-in-lansing-mid-michigan-covid-19/5231525002/">He told the Lansing State Journal</a> that when Governor Gretchen Whitmer extended the stay at home order following the restaurant’s closure on March 16, he decided to officially close: “I just felt that it was going to be a long process. And so I called a staff meeting and informed them that I would be closing the restaurant. Unfortunately it’s gone on a lot longer, with so many questions about this pandemic, that I was pretty happy with the decision.”',
-                        time: '2020/03/16',
-                        image: 'html/The_brunch_house.jpg',
-                        icon: {
-                            iconUrl: 'html/restauranticon.png',
-                            iconSize: [25, 41],
-                            iconAnchor: [3, 35],
-                            popupAnchor: [0, -41],
-                            className: 'dot',
-                        }
-		    }
-	    },
-	];
+var sliderControl = L.control.sliderControl({
+                    position: "bottomleft",
+                    layer: geojson,
+                    range: false,
+                    showAllOnStart: false
+                });
 
-            // Generate the map and set its initial view
-        	var map1 = L.map('myMap').setView([41.46091391587842, -70.56499744996137], 12);
-            L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-            }).addTo(map1);
-		
-		  // Write up the functions for using the geoJSON data to produce popups for each marker
-            var optionsObject = {
-                onEachFeature: onEachFeature
-            };
-            function onEachFeature (feature, layer) {
-               var content ="<div style='clear: both'></div><div><h4>" + feature.properties.image + " /></div><div><h4>" + feature.properties.Lot_Number + "</h4><p>" + feature.properties.time + "</p><p>" + feature.properties.Grantee + "</p></div>";
-               layer.bindPopup(content, {closeButton: true});
-            };
-
-	var group1 = L.geoJSON(dataset1, optionsObject);
-	
-		
-	$.getJSON("test_polygon_wgs84_2.geojson", function(json){
-// add GeoJSON layer to the map once the file is loaded
-    group2 = L.geoJson(json, optionsObject);
-		    
-	
-            // Create the layerGroup
-          group1.options.time = "2020"
-            group2.options.time = "1873"
-
-            // Create the layerGroup
-        var multiLayers = L.layerGroup([group1, group2]);
-
-
-	             // Set the sliderControl options
-            var sliderControl1 = L.control.sliderControl( {
-                layer: multiLayers, //REQUIRED
-                alwaysShowDate: true,
-                showAllPopups: false, // to show all popups, instead of one, same as popup option "autoClose: false"
-                showPopups: false // to set it so, when a marker is generated by the slider, its popup doesn't automatically display
+                map.addControl(sliderControl);
+                sliderControl.startSlider();
+            });
             });
 
-            // Add the slider to the map
-            map1.addControl(sliderControl1);
+var info = L.control();
 
-            // Initialize the slider
-            sliderControl1.startSlider();
+        info.onAdd = function (map) {
+            this._div = L.DomUtil.create('div', 'info');
+            this.update();
+            return this._div;
+        };
+
+        info.update = function (props) {
+            this._div.innerHTML = '<h4>Baseline demo</h4>' + (props ?
+				'<b>' + props.Lot_Number + '</b><br />' + props.Grantee + ' %'
+				: 'Hover over a region');
+        };
+
+        info.addTo(map);
+	
+	function style(feature) {
+            return {
+                weight: 1,
+                opacity: 1,
+                color: 'white',
+                dashArray: '2',
+                fillOpacity: 0.5,
+                fillColor: getColor(feature.properties.bl)
+            };
+        }
+
+        function highlightFeature(e) {
+            var layer = e.target;
+
+            layer.setStyle({
+                weight: 2,
+                color: '#00F',
+                dashArray: '',
+                fillOpacity: 0.7
+            });
+
+            if (!L.Browser.ie && !L.Browser.opera) {
+                layer.bringToFront();
+            }
+
+            info.update(layer.feature.properties); //Invio le proprieta' del poligono
+        }
+
+
+
+        function resetHighlight(e) {
+            geojson.resetStyle(e.target);
+            info.update();
+        }
+
+        function zoomToFeature(e) {
+            map.fitBounds(e.target.getBounds());
+            console.log(e);
+        }
+
+        function onEachFeature(feature, layer) {
+            layer.on({
+                mouseover: highlightFeature,
+                mouseout: resetHighlight,
+                click: zoomToFeature
+            });
+            
+        }
+
+        
+        
+        var legend = L.control({ position: 'bottomright' });
+
+        legend.onAdd = function (map) {
+
+            var div = L.DomUtil.create('div', 'info legend'),
+				grades = [0, 3, 7, 10, 15, 20, 25, 30],
+				labels = [],
+				from, to;
+
+            for (var i = 0; i < grades.length; i++) {
+                from = grades[i];
+                to = grades[i + 1];
+
+                labels.push(
+					'<i style="background:' + getColor(from + 1) + '"></i> ' +
+					from + (to ? '&ndash;' + to : '+'));
+            }
+
+            div.innerHTML = labels.join('<br>');
+            return div;
+        };
+
+        legend.addTo(map);
+		
+	
+		    
 
         });
 		
