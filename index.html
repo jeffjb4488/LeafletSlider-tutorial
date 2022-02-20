@@ -149,8 +149,15 @@
 	var group1 = L.geoJSON(dataset1, optionsObject);
 	
 		
-	$.getJSON("test_polygon_wgs_84.geojson", function(json) {
-                var group2 = L.geoJSON(json, optionsObject);
+	$.getJSON("data/test_polygon_wgs84.geojson", function(json) {
+                var group2 = L.geoJson(json, {
+	style: function (feature) {
+		return {color: feature.properties.color};
+	},
+	onEachFeature: function (feature, layer) {
+		layer.bindPopup(feature.properties.description);
+	}
+}).addTo(map);
 		    
 	
             // Create the layerGroup
