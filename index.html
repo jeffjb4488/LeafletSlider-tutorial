@@ -152,8 +152,7 @@
 	$.getJSON("test_polygon_wgs_84.geojson",function(json){
 // add GeoJSON layer to the map once the file is loaded
     group2 = L.geoJSON(json ,{
-	    style: style,
-        onEachFeature: onEachFeature
+	   onEachFeature: onEachFeature
     }).addTo(map);
          });
 		    
