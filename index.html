@@ -142,7 +142,7 @@
                 onEachFeature: onEachFeature
             };
             function onEachFeature (feature, layer) {
-               var content ="<div style='clear: both'></div><div><h4>" + feature.properties.image + " /></div><div><h4>" + feature.properties.Lot_Number + "</h4><p>" + feature.properties.time + "</p><p>" + feature.properties.Grantee + "</p></div>";
+               var content ="<div style='clear: both'></div><div><h4>" + feature.properties.Lot_Number + " /></div><div><h4>" + feature.properties.Grantee + "</h4><p>" + feature.properties.time + "</p><p>" + feature.properties.Cost + "</p></div>";
                layer.bindPopup(content, {closeButton: true});
             };
 
